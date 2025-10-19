@@ -29,6 +29,7 @@ public class AccountServiceImpl implements AccountService {
     public BankAccountResponseDto addBankAccount(BankAccountRequestDto bankAccountREquestDto) {
 
         BankAccount  bankAccount = bankAccountMapper.fromRequestDto(bankAccountREquestDto);
+
         bankAccount.setId(UUID.randomUUID().toString());
         bankAccount.setCreatedAt(new Date());
 
@@ -37,5 +38,21 @@ public class AccountServiceImpl implements AccountService {
         BankAccountResponseDto bankAccountResponseDto1 = bankAccountMapper.fromEntity(bankAccount);
 
         return bankAccountResponseDto1;
+    }
+
+    @Override
+    public BankAccountResponseDto updateBankAccount(String id ,BankAccountRequestDto bankAccountDto) {
+
+        BankAccount  bankAccount = bankAccountMapper.fromRequestDto(bankAccountDto);
+
+        bankAccount.setId(id);
+        bankAccount.setCreatedAt(new Date());
+
+        bankAccountRepository.save(bankAccount);
+
+        BankAccountResponseDto bankAccountResponseDto1 = bankAccountMapper.fromEntity(bankAccount);
+
+        return bankAccountResponseDto1;
+
     }
 }
