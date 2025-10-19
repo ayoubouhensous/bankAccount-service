@@ -1,8 +1,11 @@
 package com.sid.bankAccount_service.web;
 
 
+import com.sid.bankAccount_service.dto.BankAccountRequestDto;
+import com.sid.bankAccount_service.dto.BankAccountResponseDto;
 import com.sid.bankAccount_service.entities.BankAccount;
 import com.sid.bankAccount_service.repositories.BankAccountRepository;
+import com.sid.bankAccount_service.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,8 @@ public class AccountRestController {
     @Autowired
     private BankAccountRepository bankAccountRepository;
 
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/bankAccounts")
     public List<BankAccount>  findAll() {
@@ -29,10 +34,8 @@ public class AccountRestController {
     }
 
     @PostMapping("/bankAccounts")
-    public BankAccount addBankAccount(@RequestBody BankAccount bankAccount) {
-        bankAccount.setId(UUID.randomUUID().toString());
-        bankAccount.setCreatedAt(new Date());
-        return bankAccountRepository.save(bankAccount);
+    public BankAccountResponseDto addBankAccount(@RequestBody BankAccountRequestDto bankAccountRequestDto) {
+        return accountService.addBankAccount(bankAccountRequestDto);
     }
 
     @PostMapping("/bankAccounts/{id}")

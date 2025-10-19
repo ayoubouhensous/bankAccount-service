@@ -1,8 +1,6 @@
-package com.sid.bankAccount_service.entities;
+package com.sid.bankAccount_service.dto;
 
 import com.sid.bankAccount_service.enums.AccountType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,15 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-
-@Entity
-@Data
-@NoArgsConstructor
+@Data @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BankAccount {
-
-    @Id
+public class BankAccountResponseDto {
 
     private String id ;
 
@@ -29,10 +22,4 @@ public class BankAccount {
     private String currency;
 
     private AccountType type ;
-
-
-
-
-
-
 }
