@@ -1,8 +1,7 @@
 package com.sid.bankAccount_service.entities;
 
 import com.sid.bankAccount_service.enums.AccountType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +28,10 @@ public class BankAccount {
     private String currency;
 
     private AccountType type ;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer customer;
 
 
 
